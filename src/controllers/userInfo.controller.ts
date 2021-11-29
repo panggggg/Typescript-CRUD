@@ -1,9 +1,8 @@
 import {Request, Response} from 'express'
-import mongoose from 'mongoose'
 import userInfoModel from '../models/userInfo.model'
 
 export let getAllUser = (req: Request, res: Response) => {
-    userInfoModel.find({}, (err: any, user: any) => {
+    userInfoModel.find({}, (err: Error, user: any) => {
         if(err){
             res.send(err)
         }
@@ -12,7 +11,7 @@ export let getAllUser = (req: Request, res: Response) => {
 }
 
 export let getUserById = (req: Request, res: Response) => {
-    userInfoModel.findById({_id: req.params.id}, (err: any, user: any) => {
+    userInfoModel.findById({_id: req.params.id}, (err: Error, user: any) => {
         if(err){
             res.send("User not found")
         }
@@ -22,7 +21,7 @@ export let getUserById = (req: Request, res: Response) => {
 
 export let createNewUserInfo = (req: Request, res: Response) => {
     const newUser = new userInfoModel(req.body)
-    newUser.save((err: any, user: any) => {
+    newUser.save((err: Error, user: any) => {
         if(err){
             console.log(err)
             res.send(err)
@@ -34,7 +33,7 @@ export let createNewUserInfo = (req: Request, res: Response) => {
 }
 
 export let updateUserInfo = (req: Request, res: Response) => {
-    userInfoModel.findByIdAndUpdate({_id: req.params.id}, req.body, (err: any, user: any) => {
+    userInfoModel.findByIdAndUpdate({_id: req.params.id}, req.body, (err: Error, user: any) => {
         if(err){
             res.send(err)
         }
@@ -43,7 +42,7 @@ export let updateUserInfo = (req: Request, res: Response) => {
 }
 
 export let deleteUserInfo = (req: Request, res: Response) => {
-    userInfoModel.deleteOne({_id: req.params.id}, (err: any, user: any) => {
+    userInfoModel.deleteOne({_id: req.params.id}, (err: Error, user: any) => {
         if(err){
             res.send(err)
         }
