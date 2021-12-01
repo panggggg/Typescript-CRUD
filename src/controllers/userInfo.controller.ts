@@ -2,7 +2,7 @@ import {Request, Response} from 'express'
 import userInfoModel from '../models/userInfo.model'
 
 export let getAllUser = (req: Request, res: Response) => {
-    userInfoModel.find({}, (err: Error, user: any) => {
+    userInfoModel.find({}, (err: any, user: any) => {
         if(err){
             res.send(err)
         }
